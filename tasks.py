@@ -8,11 +8,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Celery configuration
-app = Celery("tasks", broker="redis://localhost:6379", backend="redis://localhost:6379")
+app = Celery("tasks", broker="redis://redis:6379", backend="redis://redis:6379")
+
 
 app.conf.update(
     task_ignore_result=False,
-    result_backend='redis://localhost:6379',
+    result_backend='redis://redis:6379',
     task_track_started=True,
     task_serializer='json',
     result_serializer='json',
