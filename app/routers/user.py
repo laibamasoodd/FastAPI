@@ -2,6 +2,10 @@ from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
 from sqlalchemy.orm import Session
 from .. import models, schemas, utils
 from ..database import get_db
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+from tasks import send_confirmation_email
 
 router = APIRouter(
     prefix="/users",
@@ -23,6 +27,9 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
+
+    # send confirmation email
+    send_confirmation_email.delay(new_user.email)
 
     return new_user
 
