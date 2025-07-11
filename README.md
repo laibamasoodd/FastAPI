@@ -15,4 +15,5 @@ This project supports JWT authentication, SQLAlchemy ORM, Alembic migrations, an
 - 🔒 **JWT Auth** – secure user authentication
 - 📄 **Pydantic** – data validation using type hints
 - 🐳 **Docker** – for containerized deployment
-
+- ⚙️ **Redis** – used as Celery broker
+- 📬 **Celery** – background task processing (e.g., sending emails)
